@@ -1,0 +1,184 @@
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Go Sport  - Compteurs</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    {{#if localhost}}
+      <link rel="stylesheet" href="http://localhost:8000/main.css">
+    {{else}}
+      <link rel="stylesheet" href="./assets/public/css/main.css">
+    {{/if}}
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Go Sport - Prioux</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sticky-top pt-5">
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Chiffres</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+                <span data-feather="plus-circle"></span>
+              </a>
+            </h6>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="#" id="btn-data-shop">
+
+                  Magasins
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" id="btn-data-dpt">
+
+                  Départements
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" id="btn-data-details">
+
+                  Détails
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" id="btn-data-fid">
+
+                  Fidélité
+                </a>
+              </li>
+            </ul>
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Championnat</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+                <span data-feather="plus-circle"></span>
+              </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link" href="#" id="btn-championnat-shop">
+
+                  Magasin
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" id="btn-championnat-dpt1">
+
+                  Departement L1
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" id="btn-championnat-dpt2">
+
+                  Departement L2
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Compteurs</h1>
+            <h2 id="section-title">Section title</h2>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle mr-2">
+                <span data-feather="calendar"></span>
+                Semaine
+              </button>
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                Année
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive" id="display-data">
+            <table class="table table-striped table-sm">
+              <thead class="text-center">
+                <tr class="bg-primary">
+                  <th>Magasin</th>
+                  <th colspan="3" class="border-right">CA TTC</th>
+                  <th colspan="4" class="border-right">MARGE</th>
+                  <th colspan="5" class="border-right">STOCK FIN</th>
+                  <th colspan="3" class="border-right">Qté VENTES</th>
+                  <th colspan="3" class="border-right">Nb Tickets</th>
+                  <th colspan="2" class="border-right">IDV</th>
+                  <th colspan="3" class="border-right">PANIER MOYEN</th>
+                  <th class="border-right">Tx évasion fid</th>
+                  <th colspan="2" class="border-right">CA TTC /m²</th>
+                  <th colspan="2" class="border-right">CHAMPIONNAT</th>
+                </tr>
+                <tr id="table-data-shop" class="subheading">
+                  <th></th>
+                  <th>n-1</th>
+                  <th>n</th>
+                  <th>% prog /n-1</th>
+                  <th>% n-1</th>
+                  <th>€ n-1</th>
+                  <th>% n</th>
+                  <th>€ n</th>
+                  <th>n-1</th>
+                  <th>n</th>
+                  <th>% prog /n-1</th>
+                  <th>Stock Théorique</th>
+                  <th>Sur-stock</th>
+                  <th>n-1</th>
+                  <th>n</th>
+                  <th>% prog /n-1</th>
+                  <th>n-1</th>
+                  <th>n</th>
+                  <th>% prog /n-1</th>
+                  <th>n-1</th>
+                  <th>n</th>
+                  <th>n-1</th>
+                  <th>n</th>
+                  <th>% prog /n-1</th>
+                  <th></th>
+                  <th>n-1</th>
+                  <th>n</th>
+                  <th>Classement semaine</th>
+                  <th>Classement général</th>
+                </tr>
+              </thead>
+              <tbody>
+                <td></td>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <!-- controllers -->
+    
+    {{#if localhost}}
+      <script src="http://localhost:8000/app.js"></script>
+    {{else}}
+      <script src="./assets/js/data-shop.js"></script>
+    {{/if}}
+  </body>
+</html>
