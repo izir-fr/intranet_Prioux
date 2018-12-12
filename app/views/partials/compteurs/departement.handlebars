@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Compteurs S{{week}}-{{year}}</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <form>
+      <div class="input-group">
+        <select class="custom-select" name="week" required="">
+          <option selected>Semaine</option>
+          <option value="49">49</option>
+        </select>
+        <select class="custom-select" name="year" required="">
+          <option selected>Année</option>
+          <option value="2018">2018</option>
+        </select>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit">Sélectionner</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="table-responsive" id="display-data">
+  <table class="table table-striped table-sm text-center">
+    <thead class="">
+      <tr class="bg-primary">
+        <th>Département</th>
+        <th colspan="3" class="border-right">CA TTC</th>
+        <th colspan="4" class="border-right">MARGE</th>
+        <th colspan="5" class="border-right">STOCK FIN</th>
+      </tr>
+      <tr id="table-data-shop" class="subheading">
+        <th></th>
+        <th>n-1</th>
+        <th>n</th>
+        <th>% prog /n-1</th>
+        <th>% n-1</th>
+        <th>€ n-1</th>
+        <th>% n</th>
+        <th>€ n</th>
+        <th>n-1</th>
+        <th>n</th>
+        <th>% prog /n-1</th>
+        <th>Stock Théorique</th>
+        <th>Sur-stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#if data}}
+        {{#each data}}
+          <tr>
+            <td class="font-weight-bold">{{this.departement}}</td>
+            <td>{{milleDisplay this.CA_caisse_P1}}€</td>
+            <td>{{milleDisplay this.CA_caisse_P2}}€</td>
+            <td>{{this.PROG_CA_ttc}}%</td>
+            <td>{{this.POURC_marge_P1}}%</td>
+            <td>{{milleDisplay this.MARGE_P1}}€</td>
+            <td>{{this.POURC_marge_P2}}%</td>
+            <td>{{milleDisplay this.MARGE_P2}}€</td>
+            <td>{{milleDisplay this.STOCK_fin_P1}}€</td>
+            <td>{{milleDisplay this.STOCK_fin_P2}}€</td>
+            <td>{{this.PROG_Stock_fin}}%</td>
+            <td>{{milleDisplay this.STOCK_Theorique}}€</td>
+            <td>{{this.STOCK_surplus_POURC}}%</td>
+          </tr>
+        {{/each}}
+        <tr class="font-weight-bold">
+          <td >{{total.shop}}</td>
+          <td>{{milleDisplay total.CA_caisse_P1}}€</td>
+          <td>{{milleDisplay total.CA_caisse_P2}}€</td>
+          <td>{{total.PROG_CA_ttc}}%</td>
+          <td>{{total.POURC_marge_P1}}%</td>
+          <td>{{milleDisplay total.MARGE_P1}}€</td>
+          <td>{{total.POURC_marge_P2}}%</td>
+          <td>{{milleDisplay total.MARGE_P2}}€</td>
+          <td>{{milleDisplay total.STOCK_fin_P1}}€</td>
+          <td>{{milleDisplay total.STOCK_fin_P2}}€</td>
+          <td>{{total.PROG_Stock_fin}}%</td>
+          <td>{{milleDisplay total.STOCK_Theorique}}€</td>
+          <td>{{total.STOCK_surplus_POURC}}%</td>
+        </tr>        
+      {{else}}
+        <div class="row">
+          <div class="div col-12 text-center bg-light p-5">
+            Il n'y a aucune donnée disponible pour cette semaine
+          </div>
+        </div>
+      {{/if}}
+    </tbody>
+  </table>
+</div>

@@ -8,4 +8,7 @@ var cmsCtrl = require('../controllers/cmsControllers')
 // Get Homepage
 router.get('/', cmsCtrl.index)
 
+// Get robots.txt
+router.get('/robots.txt', cmsCtrl.robots)
+
 module.exports = router

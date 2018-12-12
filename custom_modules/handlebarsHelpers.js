@@ -46,5 +46,13 @@ module.exports = {
     } else {
       return ''
     }
+  },
+  milleDisplay: (val) => {
+    var number = Number(val).toLocaleString('fr-FR')
+    if (number === 'NaN') {
+      return val
+    } else {
+      return number
+    }
   }
 }

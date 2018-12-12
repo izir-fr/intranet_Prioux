@@ -19,8 +19,8 @@ var port = 3000
 var credentials = require('./app/config/credentials')
 
 // MongoDB
-// mongoose.Promise = require('bluebird')
-// mongoose.connect(credentials.mLab)
+mongoose.Promise = require('bluebird')
+mongoose.connect(credentials.mLab, { useNewUrlParser: true })
 
 // Handlebars
 var hbs = exphbs.create({
@@ -89,6 +89,8 @@ app.use(function (req, res, next) {
 })
 
 app.use('/', require('./app/router/cmsRoutes'))
+app.use('/compteurs/', require('./app/router/compteursRoutes'))
+app.use('/import/', require('./app/router/importRoutes'))
 
 // 404
 app.use(function (req, res, next) {

@@ -32,6 +32,7 @@
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.1",
+    "csvtojson": "^2.0.8",
     "dotenv": "^5.0.1",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
