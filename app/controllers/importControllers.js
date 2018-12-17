@@ -102,7 +102,7 @@ var importCtrl = {
             jsonObj.forEach((val) => {
               val.week = req.body.week
               val.year = req.body.year
-              val.shop = req.body.Magasin
+              val.shop = val.Magasin
 
               var singlefidRecap = new FideliteRecap(val)
               singlefidRecap.save(function (err, recap) {

@@ -90,6 +90,7 @@ app.use(function (req, res, next) {
 
 app.use('/', require('./app/router/cmsRoutes'))
 app.use('/compteurs/', require('./app/router/compteursRoutes'))
+app.use('/championnat/', require('./app/router/championnatRoutes'))
 app.use('/import/', require('./app/router/importRoutes'))
 
 // 404

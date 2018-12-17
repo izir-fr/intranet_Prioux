@@ -1,3 +1,5 @@
+var Handlebars = require('handlebars')
+
 module.exports = {
   date: (val) => { return val.getDate() + '/' + (parseInt(val.getMonth()) + 1) + '/' + val.getFullYear() },
   dateFullYear: (val) => { return val.getUTCFullYear() },
@@ -54,5 +56,12 @@ module.exports = {
     } else {
       return number
     }
-  }
+  },
+  year_select: () => {
+    var out = ''
+    for (var i = 1; i < 53; i++) {
+      out = out + '<option value="' + i + '">' + i + '</option>'
+    }
+    return new Handlebars.SafeString(out)
+  },
 }

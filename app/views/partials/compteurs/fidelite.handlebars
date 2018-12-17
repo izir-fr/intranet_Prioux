@@ -5,11 +5,13 @@
       <div class="input-group">
         <select class="custom-select" name="week" required="">
           <option selected>Semaine</option>
-          <option value="49">49</option>
+          {{year_select}}
         </select>
         <select class="custom-select" name="year" required="">
           <option selected>Année</option>
+          <option value="2017">2017</option>
           <option value="2018">2018</option>
+          <option value="2019">2019</option>
         </select>
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="submit">Sélectionner</button>
@@ -26,7 +28,7 @@
         <th>Magasin</th>
         <th colspan="3" class="border-right">Nb Clients</th>
         <th colspan="3" class="border-right">Nb cartes fidélité crées</th>
-        <th colspan="1" class="border-right">"Tx évasion fidélité ( > 33% en rouge)"</th>
+        <th colspan="1" class="border-right">Tx évasion fidélité <br><small class="text-muted">(>33% en rouge)</small></th>
         <th colspan="2" class="border-right">Nb Clients</th>
         <th colspan="1" class="border-right">Tx Client encartés</th>
         <th colspan="2" class="border-right">CA TTC</th>
@@ -57,13 +59,13 @@
             <th>{{this.PROG_Qt_ticket}}</th>
             <th>{{this.CARTE_fid_P1}}</th>
             <th>{{this.CARTE_fid_P2}}</th>
-            <th>{{this}}</th>
-            <th>{{this}}</th>
-            <th>{{this}}</th>
-            <th>{{this}}</th>
-            <th>{{this}}</th>
-            <th>{{this}}</th>
-            <th>{{this}}</th>
+            <th>{{this.CARTE_fid_prog}}%</th>
+            <th>{{this.tx_evasion}}%</th>
+            <th>{{this.client_non_encarte_num}}</th>
+            <th>{{this.client_encarte_num}}</th>
+            <th>{{this.tx_encarte}}%</th>
+            <th>{{this.ca_encarte}}€</th>
+            <th>{{this.poids_ca}}%</th>
           </tr>
         {{/each}}
         <tr class="font-weight-bold">
@@ -73,13 +75,13 @@
           <th>{{total.PROG_Qt_ticket}}</th>
           <th>{{total.CARTE_fid_P1}}</th>
           <th>{{total.CARTE_fid_P2}}</th>
-          <th>{{total}}</th>
-          <th>{{total}}</th>
-          <th>{{total}}</th>
-          <th>{{total}}</th>
-          <th>{{total}}</th>
-          <th>{{total}}</th>
-          <th>{{total}}</th>
+          <th>{{total.CARTE_fid_prog}}%</th>
+          <th>{{total.tx_evasion}}%</th>
+          <th>{{total.client_non_encarte_num}}</th>
+          <th>{{total.client_encarte_num}}</th>
+          <th>{{total.tx_encarte}}%</th>
+          <th>{{total.ca_encarte}}€</th>
+          <th>{{total.poids_ca}}%</th>
         </tr>        
       {{else}}
         <div class="row">
