@@ -15,31 +15,29 @@
           <table class="table table-striped table-sm text-center">
             <thead class="">
               <tr class="bg-primary">
-                <th>#</th>
                 <th>Magasin</th>
                 <th>CA TTC</th>
                 <th>MARGE €</th>
                 <th>PANIER MOYEN</th>
                 <th>IDV</th>
-                <th>Tx évasion fidélité</th>
-                <th>TOTAUX S{{./this.week}} - {{./this.year}}</th>
-                <th>cumul chpt</th>
-                <th>Classement chpt</th>
+                <th>EVASION FIDELITE</th>
+                <th>POINTS S{{./this.week}} - {{./this.year}}</th>
+                <th>CUMUL POINTS</th>
+                <th>CLASSEMENT GENERAL</th>
               </tr>
             </thead>
             <tbody>
               {{#each this.data}}
                 <tr>
-                  <td class="font-weight-bold">{{@index}}</td>
                   <td class="font-weight-bold">{{this.shop}}</td>
                   <td>{{this.PROG_CA_ttc}}</td>
-                  <td>{{this.PROG_POURC_Marge}}</td>
+                  <td>{{this.PROG_euro_Marge_pourc}}</td>
                   <td>{{this.PROG_PanierMoyen}}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>{{this.prog_idv}}</td>
+                  <td>{{this.points_fid}}</td>
+                  <td>{{this.points_total}}</td>
+                  <td>{{this.cumul_points}}</td>
+                  <td>{{this.classement_general}}</td>
                 </tr>
               {{/each}} 
             </tbody>

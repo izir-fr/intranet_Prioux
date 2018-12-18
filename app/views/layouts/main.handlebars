@@ -16,7 +16,7 @@
     {{#if localhost}}
       <link rel="stylesheet" href="http://localhost:8000/main.css">
     {{else}}
-      <link rel="stylesheet" href="./assets/public/css/main.css">
+      <link rel="stylesheet" href="./assets/public/main.css">
     {{/if}}
   </head>
 
@@ -35,10 +35,17 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-light" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chiffres</a>
             <div class="dropdown-menu" aria-labelledby="dropdown03">
-              <a class="dropdown-item" href="/compteurs/shop">Magasins</a>
-              <a class="dropdown-item" href="/compteurs/departement">Départements</a>
-              <a class="dropdown-item" href="/compteurs/details">Détails</a>
-              <a class="dropdown-item" href="/compteurs/fidelite">Fidélité</a>
+              {{#if week}}
+                <a class="dropdown-item" href="/compteurs/shop?week={{week}}&year={{year}}">Magasins</a>
+                <a class="dropdown-item" href="/compteurs/departement?week={{week}}&year={{year}}">Départements</a>
+                <a class="dropdown-item" href="/compteurs/details?week={{week}}&year={{year}}">Détails</a>
+                <a class="dropdown-item" href="/compteurs/fidelite?week={{week}}&year={{year}}">Fidélité</a>
+              {{else}}
+                <a class="dropdown-item" href="/compteurs/shop">Magasins</a>
+                <a class="dropdown-item" href="/compteurs/departement">Départements</a>
+                <a class="dropdown-item" href="/compteurs/details">Détails</a>
+                <a class="dropdown-item" href="/compteurs/fidelite">Fidélité</a>
+              {{/if}}
             </div>
           </li>
           <li class="nav-item dropdown">
