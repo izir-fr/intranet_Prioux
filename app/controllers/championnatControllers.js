@@ -48,7 +48,7 @@ var champControllers = {
           }
         }, (data) => {
           // console.log(data)
-          resolve({data: data})
+          resolve(data)
         })      
       })      
     }
@@ -59,7 +59,7 @@ var champControllers = {
       })
       .then((val) => {
         console.log(val)
-        res.render('partials/championnat/shop', )
+        res.render('partials/championnat/shop', {data: val, date: championnatDate})
       })
   },
   departementL1: (req, res) => {

@@ -1,5 +1,8 @@
 node_modules
 db_backup
+*/import/*
 .env
 .csv
 .DS_Store
+*.csv
+*.csv
