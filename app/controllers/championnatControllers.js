@@ -120,13 +120,17 @@ var champControllers = {
               populate.points_total = roundNumber(Number(populate.PROG_CA_ttc.replace(/,/, '.')) + Number(populate.PROG_euro_Marge_pourc.replace(/,/, '.')) + Number(populate.PROG_PanierMoyen.replace(/,/, '.')) + Number(populate.prog_idv.replace(/,/, '.')) + populate.points_fid)
               
               // cumul calc
-              if (val[valKey - 1].data.length >= 1) {
+              if ((valKey - 1) <= 0) {
+                populate.cumul_points = populate.points_total
+              } else if (val[valKey - 1].data.length >= 1 || val[valKey - 1].data !== undefined) {
                 var prev = val[valKey - 1].data.find((obj) => {
                   if (obj.shop === populate.shop) {
                     return obj
                   }
-                })                
-                populate.cumul_points = Number(populate.points_total) + Number(prev.points_total)
+                })
+                if (prev !== undefined) {
+                  populate.cumul_points = Number(populate.points_total) + Number(prev.points_total)
+                }
               } else {
                 populate.cumul_points = populate.points_total
               }
