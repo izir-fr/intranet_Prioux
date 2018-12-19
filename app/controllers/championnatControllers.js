@@ -67,6 +67,7 @@ var champControllers = {
           // var idv = data
           data.data.forEach((val) => {
             val.PROG_CA_ttc = roundNumber(val.PROG_CA_ttc)
+            val.PROG_PanierMoyen = roundNumber(val.PROG_PanierMoyen)
             val.PROG_euro_Marge_pourc = roundNumber(Number(val.PROG_euro_Marge_pourc.replace(/,/, '.')) * 3)
             val.prog_idv = roundNumber((Number(val.IDV_P2.replace(/,/, '.')) - Number(val.IDV_P1.replace(/,/, '.'))) / Number(val.IDV_P1.replace(/,/, '.')) *100)
             finalDatas.push(val)
@@ -120,7 +121,7 @@ var champControllers = {
               populate.points_total = roundNumber(Number(populate.PROG_CA_ttc.replace(/,/, '.')) + Number(populate.PROG_euro_Marge_pourc.replace(/,/, '.')) + Number(populate.PROG_PanierMoyen.replace(/,/, '.')) + Number(populate.prog_idv.replace(/,/, '.')) + populate.points_fid)
               
               // cumul calc
-              if ((valKey - 1) <= 0) {
+              if ((valKey - 1) < 0) {
                 populate.cumul_points = populate.points_total
               } else if (val[valKey - 1].data.length >= 1 || val[valKey - 1].data !== undefined) {
                 var prev = val[valKey - 1].data.find((obj) => {
@@ -129,7 +130,7 @@ var champControllers = {
                   }
                 })
                 if (prev !== undefined) {
-                  populate.cumul_points = Number(populate.points_total) + Number(prev.points_total)
+                  populate.cumul_points = Number(populate.points_total) + Number(prev.cumul_points)
                 }
               } else {
                 populate.cumul_points = populate.points_total
