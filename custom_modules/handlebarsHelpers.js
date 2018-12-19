@@ -65,7 +65,7 @@ module.exports = {
     return new Handlebars.SafeString(out)
   },
   prog_plus: (val) => {
-    if (val !== undefined) {
+    if (val && val !== undefined) {
       var number = Number(val.replace(/,/, '.'))
       if (number >= 0) {
         return 'text-success'
@@ -76,7 +76,7 @@ module.exports = {
 
   },
   prog_moins: (val) => {
-    if (val !== undefined) {
+    if (val && val !== undefined) {
       var number = Number(val.replace(/,/, '.'))
       if (number <= 0) {
         return 'text-success'
@@ -86,7 +86,7 @@ module.exports = {
     }
   },
   evasion: (val) => {
-    if (val !== undefined) {
+    if (val && val !== undefined) {
       var number = Number(val.replace(/,/, '.'))
       if (number <= 33) {
         return 'text-success'

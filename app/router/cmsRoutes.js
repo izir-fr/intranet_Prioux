@@ -11,4 +11,7 @@ router.get('/', cmsCtrl.index)
 // Get robots.txt
 router.get('/robots.txt', cmsCtrl.robots)
 
+// Get robots.txt
+router.post('/login', cmsCtrl.login)
+
 module.exports = router

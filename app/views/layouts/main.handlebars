@@ -73,7 +73,22 @@
     <div class="container-fluid pt-5">
       <div class="row">
         <main role="main" class="col-12 px-4">
-          {{{body}}}
+          {{#if password}}
+            {{{body}}}
+          {{else}}
+            <div class="row">
+              <div class="col-md-6 mx-auto">
+                <form action="/login" method="post" class="mt-5 pt-5">
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Mot de passe</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Valider</button>
+                </form>                
+              </div>
+            </div>
+
+          {{/if}}
         </main>
       </div>
     </div>

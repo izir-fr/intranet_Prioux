@@ -79,6 +79,7 @@ app.use(flash())
 
 // Global Vars
 app.use(function (req, res, next) {
+  res.locals.password = req.session.password
   res.locals.localhost = process.env.LOCAL === 'true'
   res.locals.success_msg = req.flash('success_msg')
   res.locals.error_msg = req.flash('error_msg')
