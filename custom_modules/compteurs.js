@@ -89,8 +89,10 @@ var algo = {
     DepartementRecap
       .find({ week: req.week, year: req.year })
       .exec((err, datas) => {
-        if (err || datas.length < 1) {
+        if (err) {
           error('db querry')
+        } else if (datas.length < 1) {
+          callback({week: req.week, year: req.year, data: {}, total: null})
         } else {
           var subTotal
           var dptDatas

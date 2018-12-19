@@ -1,0 +1,49 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Championnat S{{date.week_start}}-{{date.year_start}} / S{{date.week_end}}-{{date.year_end}}</h1>
+</div>
+<div class="row">
+  <div class="col-md-2">
+    {{#each data}}
+      <a href="#{{this.week}}-{{this.year}}" class="p-3 d-block text-dark">S{{this.week}} - {{this.year}}</a>
+    {{/each}}
+  </div>
+  <div class="col-md-10">
+    {{#each data}}
+      <h3 id="{{this.week}}-{{this.year}}" class="py-3">S{{this.week}} - {{this.year}}</h3>
+      {{#if this.data}}
+        <div class="table-responsive" id="display-data">
+          <table class="table table-striped table-sm text-center">
+            <thead class="">
+              <tr class="bg-primary">
+                <th>Magasin</th>
+                <th>MARGE €</th>
+                <th>STOCK €</th>
+                <th>POINTS S{{./this.week}} - {{./this.year}}</th>
+                <th>CUMUL POINTS</th>
+                <th>CLASSEMENT GENERAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each this.data}}
+                <tr>
+                  <td class="font-weight-bold">{{this.departement}}</td>
+                  <td>{{this.total.PROG_euro_Marge_pourc}}</td>
+                  <td>{{this.total.STOCK_surplus_POURC}}</td>
+                  <td>{{this.points_total}}</td>
+                  <td>{{this.cumul_points}}</td>
+                  <td>{{this.classement_general}}</td>
+                </tr>
+              {{/each}} 
+            </tbody>
+          </table>
+        </div>
+      {{else}}
+        <div class="row">
+          <div class="div col-12 text-center bg-light p-5">
+            Il n'y a aucune donnée disponible pour cette semaine
+          </div>
+        </div>      
+      {{/if}}
+    {{/each}}    
+  </div>
+</div>
