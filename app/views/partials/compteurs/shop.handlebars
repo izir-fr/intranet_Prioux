@@ -68,30 +68,30 @@
       {{#if data}}
         {{#each data}}
           <tr>
-            <td class="font-weight-bold">{{this.shop}}</td>
+            <td class="font-weight-bold border-right">{{this.shop}}</td>
             <td>{{milleDisplay this.CA_caisse_P1}}€</td>
             <td>{{milleDisplay this.CA_caisse_P2}}€</td>
-            <td>{{this.PROG_CA_ttc}}%</td>
+            <td class="font-weight-bold {{prog_plus this.PROG_CA_ttc}} border-right">{{this.PROG_CA_ttc}}%</td>
             <td>{{this.POURC_marge_P1}}%</td>
             <td>{{milleDisplay this.MARGE_P1}}€</td>
             <td>{{this.POURC_marge_P2}}%</td>
-            <td>{{milleDisplay this.MARGE_P2}}€</td>
+            <td class="font-weight-bold {{prog_plus this.PROG_euro_Marge_pourc}} border-right">{{milleDisplay this.MARGE_P2}}€</td>
             <td>{{milleDisplay this.STOCK_fin_P1}}€</td>
             <td>{{milleDisplay this.STOCK_fin_P2}}€</td>
-            <td>{{this.PROG_Stock_fin}}%</td>
+            <td class="font-weight-bold {{prog_moins this.PROG_Stock_fin}}">{{this.PROG_Stock_fin}}%</td>
             <td>{{milleDisplay this.STOCK_Theorique}}€</td>
-            <td>{{this.STOCK_surplus_POURC}}%</td>
+            <td class="font-weight-bold {{prog_moins this.STOCK_surplus_POURC}} border-right">{{this.STOCK_surplus_POURC}}%</td>
             <td>{{milleDisplay this.Qt_venteCaisse_P1}}</td>
             <td>{{milleDisplay this.Qt_venteCaisse_P2}}</td>
-            <td>{{this.PROG_Qt_Ventes}}%</td>
+            <td class="font-weight-bold {{prog_plus this.PROG_Qt_Ventes}} border-right">{{this.PROG_Qt_Ventes}}%</td>
             <td>{{milleDisplay this.Qt_tickets_P1}}</td>
             <td>{{milleDisplay this.Qt_tickets_P2}}</td>
-            <td>{{this.PROG_Qt_ticket}}%</td>
+            <td class="font-weight-bold {{prog_plus this.PROG_Qt_ticket}} border-right">{{this.PROG_Qt_ticket}}%</td>
             <td>{{this.IDV_P1}}</td>
-            <td>{{this.IDV_P2}}</td>
+            <td class="border-right">{{this.IDV_P2}}</td>
             <td>{{milleDisplay this.PANIER_moyen_P1}}€</td>
             <td>{{milleDisplay this.PANIER_moyen_P2}}€</td>
-            <td>{{this.PROG_PanierMoyen}}%</td>
+            <td class="font-weight-bold {{prog_plus this.PROG_PanierMoyen}} border-right">{{this.PROG_PanierMoyen}}%</td>
             <td>{{milleDisplay this.CA_m2_P1}}€</td>
             <td>{{milleDisplay this.CA_m2_P2}}€</td>
           </tr>
@@ -100,27 +100,27 @@
           <td >{{total.shop}}</td>
           <td>{{milleDisplay total.CA_caisse_P1}}€</td>
           <td>{{milleDisplay total.CA_caisse_P2}}€</td>
-          <td>{{total.PROG_CA_ttc}}%</td>
+          <td class="{{prog_plus total.PROG_CA_ttc}}">{{total.PROG_CA_ttc}}%</td>
           <td>{{total.POURC_marge_P1}}%</td>
           <td>{{milleDisplay total.MARGE_P1}}€</td>
           <td>{{total.POURC_marge_P2}}%</td>
-          <td>{{milleDisplay total.MARGE_P2}}€</td>
+          <td class="{{prog_plus total.PROG_euro_Marge_pourc}}">{{milleDisplay total.MARGE_P2}}€</td>
           <td>{{milleDisplay total.STOCK_fin_P1}}€</td>
           <td>{{milleDisplay total.STOCK_fin_P2}}€</td>
-          <td>{{total.PROG_Stock_fin}}%</td>
+          <td  class="{{prog_moins total.PROG_Stock_fin}}">{{total.PROG_Stock_fin}}%</td>
           <td>{{milleDisplay total.STOCK_Theorique}}€</td>
-          <td>{{total.STOCK_surplus_POURC}}%</td>
+          <td class="{{prog_moins total.STOCK_surplus_POURC}}">{{total.STOCK_surplus_POURC}}%</td>
           <td>{{milleDisplay total.Qt_venteCaisse_P1}}</td>
           <td>{{milleDisplay total.Qt_venteCaisse_P2}}</td>
-          <td>{{total.PROG_Qt_Ventes}}%</td>
+          <td class="{{prog_plus total.PROG_Qt_Ventes}}">{{total.PROG_Qt_Ventes}}%</td>
           <td>{{milleDisplay total.Qt_tickets_P1}}</td>
           <td>{{milleDisplay total.Qt_tickets_P2}}</td>
-          <td>{{total.PROG_Qt_ticket}}%</td>
+          <td class="{{prog_plus total.PROG_Qt_ticket}}">{{total.PROG_Qt_ticket}}%</td>
           <td>{{milleDisplay total.IDV_P1}}</td>
           <td>{{milleDisplay total.IDV_P2}}</td>
           <td>{{milleDisplay total.PANIER_moyen_P1}}€</td>
           <td>{{milleDisplay total.PANIER_moyen_P2}}€</td>
-          <td>{{total.PROG_PanierMoyen}}%</td>
+          <td class="{{prog_plus total.PROG_PanierMoyen}}">{{total.PROG_PanierMoyen}}%</td>
           <td>{{total.CA_m2_P1}}€</td>
           <td>{{total.CA_m2_P2}}€</td>
         </tr>        

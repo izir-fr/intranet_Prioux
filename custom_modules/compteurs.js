@@ -58,7 +58,7 @@ var roundNumber = (val) => {
 }
 
 var surStock = (stockFin, stockTheo) => {
-  return roundNumber(100 * ((stockFin / stockTheo) - 1))
+  return roundNumber(((stockFin / stockTheo) - 1) * 100)
 }
 
 var algo = {
@@ -139,6 +139,7 @@ var algo = {
               POURC_marge_P2: roundNumber(total(dptDatas, 'POURC_marge_P2') / 7),
               STOCK_Theorique: total(dptDatas, 'STOCK_Theorique')
             }
+
             subTotal.PROG_CA_ttc = roundNumber(((subTotal.CA_P2 - subTotal.CA_P1) / subTotal.CA_P1) * 100)
             subTotal.PROG_Stock_fin = roundNumber(((subTotal.STOCK_fin_P2 - subTotal.STOCK_fin_P1) / subTotal.STOCK_fin_P1) * 100)
             subTotal.PROG_euro_Marge_pourc = roundNumber(((subTotal.MARGE_P2 - subTotal.MARGE_P1) / subTotal.MARGE_P1) * 100)
@@ -177,12 +178,12 @@ var algo = {
                 POURC_marge_P1: roundNumber(sum(val.datas, 'POURC_marge_P1') / 7),
                 POURC_marge_P2: roundNumber(sum(val.datas, 'POURC_marge_P2') / 7),
                 STOCK_Theorique: sum(val.datas, 'STOCK_Theorique'),
-                STOCK_surplus_POURC: roundNumber(sum(val.datas, 'STOCK_surplus_POURC') / 7)
               }
               val.total = total
               val.total.PROG_CA_ttc = roundNumber(((total.CA_P2 - total.CA_P1)/ total.CA_P1) * 100)
               val.total.PROG_Stock_fin = roundNumber(((total.STOCK_fin_P2 - total.STOCK_fin_P1)/ total.STOCK_fin_P1) * 100)
               val.total.PROG_euro_Marge_pourc = roundNumber(((total.MARGE_P2 - total.MARGE_P1)/ total.MARGE_P1) * 100)
+              val.total.STOCK_surplus_POURC = surStock(total.STOCK_fin_P2, total.STOCK_Theorique)
               // tri
               val.datas.sort((a,b) => {
                 return Number(b.CA_P2) - Number(a.CA_P2)

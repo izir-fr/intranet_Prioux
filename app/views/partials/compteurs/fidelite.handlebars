@@ -28,7 +28,7 @@
         <th>Magasin</th>
         <th colspan="3" class="border-right">Nb Clients</th>
         <th colspan="3" class="border-right">Nb cartes fidélité crées</th>
-        <th colspan="1" class="border-right">Tx évasion fidélité <br><small class="text-muted">(>33% en rouge)</small></th>
+        <th colspan="1" class="border-right">Tx évasion fidélité <br><small class="text-white">(objectif <33%)</small></th>
         <th colspan="2" class="border-right">Nb Clients</th>
         <th colspan="1" class="border-right">Tx Client encartés</th>
         <th colspan="2" class="border-right">CA TTC</th>
@@ -54,33 +54,33 @@
         {{#each data}}
           <tr>
             <td class="font-weight-bold">{{this.shop}}</td>
-            <th>{{this.Qt_tickets_P1}}</th>
-            <th>{{this.Qt_tickets_P2}}</th>
-            <th>{{this.PROG_Qt_ticket}}</th>
+            <th>{{milleDisplay this.Qt_tickets_P1}}</th>
+            <th>{{milleDisplay this.Qt_tickets_P2}}</th>
+            <th class="{{prog_plus this.PROG_Qt_ticket}}">{{this.PROG_Qt_ticket}}</th>
             <th>{{this.CARTE_fid_P1}}</th>
             <th>{{this.CARTE_fid_P2}}</th>
-            <th>{{this.CARTE_fid_prog}}%</th>
-            <th>{{this.tx_evasion}}%</th>
-            <th>{{this.client_non_encarte_num}}</th>
-            <th>{{this.client_encarte_num}}</th>
+            <th class="{{prog_plus this.CARTE_fid_prog}}">{{this.CARTE_fid_prog}}%</th>
+            <th class="{{evasion this.tx_evasion}}">{{this.tx_evasion}}%</th>
+            <th>{{milleDisplay this.client_non_encarte_num}}</th>
+            <th>{{milleDisplay this.client_encarte_num}}</th>
             <th>{{this.tx_encarte}}%</th>
-            <th>{{this.ca_encarte}}€</th>
+            <th>{{milleDisplay this.ca_encarte}}€</th>
             <th>{{this.poids_ca}}%</th>
           </tr>
         {{/each}}
         <tr class="font-weight-bold">
           <td >{{total.shop}}</td>
-          <th>{{total.Qt_tickets_P1}}</th>
-          <th>{{total.Qt_tickets_P2}}</th>
-          <th>{{total.PROG_Qt_ticket}}</th>
+          <th>{{milleDisplay total.Qt_tickets_P1}}</th>
+          <th>{{milleDisplay total.Qt_tickets_P2}}</th>
+          <th class="{{prog_plus total.PROG_Qt_ticket}}">{{total.PROG_Qt_ticket}}</th>
           <th>{{total.CARTE_fid_P1}}</th>
           <th>{{total.CARTE_fid_P2}}</th>
-          <th>{{total.CARTE_fid_prog}}%</th>
-          <th>{{total.tx_evasion}}%</th>
-          <th>{{total.client_non_encarte_num}}</th>
-          <th>{{total.client_encarte_num}}</th>
+          <th class="{{prog_plus total.CARTE_fid_prog}}">{{total.CARTE_fid_prog}}%</th>
+          <th class="{{evasion total.tx_evasion}}">{{total.tx_evasion}}%</th>
+          <th>{{milleDisplay total.client_non_encarte_num}}</th>
+          <th>{{milleDisplay total.client_encarte_num}}</th>
           <th>{{total.tx_encarte}}%</th>
-          <th>{{total.ca_encarte}}€</th>
+          <th>{{milleDisplay total.ca_encarte}}€</th>
           <th>{{total.poids_ca}}%</th>
         </tr>        
       {{else}}

@@ -63,34 +63,34 @@
                 <td class="font-weight-bold">{{this.shop}}</td>
                 <td>{{milleDisplay this.CA_P1}}€</td>
                 <td>{{milleDisplay this.CA_P2}}€</td>
-                <td>{{this.PROG_CA_ttc}}%</td>
+                <td class="{{prog_plus this.PROG_CA_ttc}} font-weight-bold">{{this.PROG_CA_ttc}}%</td>
                 <td>{{this.POURC_marge_P1}}%</td>
                 <td>{{milleDisplay this.MARGE_P1}}€</td>
                 <td>{{this.POURC_marge_P2}}%</td>
                 <td>{{milleDisplay this.MARGE_P2}}€</td>
-                <td>{{this.PROG_euro_Marge_pourc}}%</td>
+                <td class="{{prog_plus this.PROG_euro_Marge_pourc}} font-weight-bold">{{this.PROG_euro_Marge_pourc}}%</td>
                 <td>{{milleDisplay this.STOCK_fin_P1}}€</td>
                 <td>{{milleDisplay this.STOCK_fin_P2}}€</td>
-                <td>{{this.PROG_Stock_fin}}%</td>
+                <td class="{{prog_moins this.PROG_Stock_fin}} font-weight-bold">{{this.PROG_Stock_fin}}%</td>
                 <td>{{milleDisplay this.STOCK_Theorique}}€</td>
-                <td>{{this.STOCK_surplus_POURC}}%</td>
+                <td class="{{prog_moins this.STOCK_surplus_POURC}} font-weight-bold">{{this.STOCK_surplus_POURC}}%</td>
               </tr>
             {{/each}}
             <tr class="font-weight-bold">
               <td >{{total.shop}}</td>
               <td>{{milleDisplay total.CA_P1}}€</td>
               <td>{{milleDisplay total.CA_P2}}€</td>
-              <td>{{total.PROG_CA_ttc}}%</td>
+              <td class="{{prog_plus total.PROG_CA_ttc}}">{{total.PROG_CA_ttc}}%</td>
               <td>{{total.POURC_marge_P1}}%</td>
               <td>{{milleDisplay total.MARGE_P1}}€</td>
               <td>{{total.POURC_marge_P2}}%</td>
               <td>{{milleDisplay total.MARGE_P2}}€</td>
-              <td>{{total.PROG_euro_Marge_pourc}}%</td>
+              <td class="{{prog_plus total.PROG_euro_Marge_pourc}}">{{total.PROG_euro_Marge_pourc}}%</td>
               <td>{{milleDisplay total.STOCK_fin_P1}}€</td>
               <td>{{milleDisplay total.STOCK_fin_P2}}€</td>
-              <td>{{total.PROG_Stock_fin}}%</td>
+              <td class="{{prog_moins total.PROG_Stock_fin}}">{{total.PROG_Stock_fin}}%</td>
               <td>{{milleDisplay total.STOCK_Theorique}}€</td>
-              <td>{{total.STOCK_surplus_POURC}}%</td>
+              <td class="{{prog_moins total.STOCK_surplus_POURC}}">{{total.STOCK_surplus_POURC}}%</td>
             </tr>
           </tbody>
         </table>

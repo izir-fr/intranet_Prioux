@@ -54,7 +54,7 @@ module.exports = {
     if (number === 'NaN') {
       return val
     } else {
-      return number
+      return number.split(',').join(' ')
     }
   },
   year_select: () => {
@@ -64,4 +64,35 @@ module.exports = {
     }
     return new Handlebars.SafeString(out)
   },
+  prog_plus: (val) => {
+    if (val !== undefined) {
+      var number = Number(val.replace(/,/, '.'))
+      if (number >= 0) {
+        return 'text-success'
+      } else {
+        return 'text-danger'
+      }      
+    }
+
+  },
+  prog_moins: (val) => {
+    if (val !== undefined) {
+      var number = Number(val.replace(/,/, '.'))
+      if (number <= 0) {
+        return 'text-success'
+      } else {
+        return 'text-danger'
+      }      
+    }
+  },
+  evasion: (val) => {
+    if (val !== undefined) {
+      var number = Number(val.replace(/,/, '.'))
+      if (number <= 33) {
+        return 'text-success'
+      } else {
+        return 'text-danger'
+      }      
+    }
+  }
 }
