@@ -66,23 +66,32 @@ module.exports = {
   },
   prog_plus: (val) => {
     if (val && val !== undefined) {
-      var number = Number(val.replace(/,/, '.'))
+      var number
+      if (typeof val === 'number') {
+        number = val
+      } else {
+        number = Number(val.replace(/,/, '.'))      
+      }
       if (number >= 0) {
         return 'text-success'
       } else {
         return 'text-danger'
-      }      
+      }        
     }
-
   },
   prog_moins: (val) => {
     if (val && val !== undefined) {
-      var number = Number(val.replace(/,/, '.'))
-      if (number <= 0) {
-        return 'text-success'
+      var number
+      if (typeof val === 'number') {
+        number = val
       } else {
+        number = Number(val.replace(/,/, '.'))      
+      }
+      if (number >= 0) {
         return 'text-danger'
-      }      
+      } else {
+        return 'text-success'
+      }        
     }
   },
   evasion: (val) => {

@@ -1,24 +1,30 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Compteurs S{{week}}-{{year}}</h1>
-  <div class="btn-toolbar mb-2 mb-md-0">
-    <form>
-      <div class="input-group">
-        <select class="custom-select" name="week" required="">
-          <option selected>Semaine</option>
-          {{year_select}}
-        </select>
-        <select class="custom-select" name="year" required="">
-          <option selected>Année</option>
-          <option value="2017">2017</option>
-          <option value="2018">2018</option>
-          <option value="2019">2019</option>
-        </select>
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="submit">Sélectionner</button>
+  {{#if cumul}}
+    <h1 class="h2">Cumul chiffres</h1>
+    <div class="d-block text-muted">Période en cours : 
+    <span class="font-weight-bold">S{{week.week_start}}-{{week.year_start}} - S{{week.week_end}}-{{week.year_end}}</span></div>
+  {{else}}
+    <h1 class="h2">Compteurs S{{week}}-{{year}}</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <form>
+        <div class="input-group">
+          <select class="custom-select" name="week" required="">
+            <option selected>Semaine</option>
+            {{year_select}}
+          </select>
+          <select class="custom-select" name="year" required="">
+            <option selected>Année</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+          </select>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Sélectionner</button>
+          </div>
         </div>
-      </div>
-    </form>
-  </div>
+      </form>
+    </div>  
+  {{/if}}
 </div>
 
 <div class="table-responsive" id="display-data">

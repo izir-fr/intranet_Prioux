@@ -93,6 +93,7 @@ app.use('/', require('./app/router/cmsRoutes'))
 app.use('/compteurs/', require('./app/router/compteursRoutes'))
 app.use('/championnat/', require('./app/router/championnatRoutes'))
 app.use('/import/', require('./app/router/importRoutes'))
+app.use('/cumul/', require('./app/router/cumulRoutes'))
 
 // 404
 app.use(function (req, res, next) {
