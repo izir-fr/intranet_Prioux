@@ -219,7 +219,7 @@ var algo = {
           })
 
           FideliteRecap
-            .find({ week: req.week, year: req.year })
+            .find({ week: req.week, year: req.year, Client: { $ne : '' } })
             .exec((err, fidVal) => {
               if (err || fidVal.length < 1) {
                 error('db querry')
@@ -233,7 +233,7 @@ var algo = {
                 fidVal.forEach((obj) => {
                   shop = obj.shop.replace(remove, '')
                   fidDatas.forEach((search, key) => {
-                    if (shop === search.shop && obj.Client !== '') {
+                    if (shop === search.shop) {
                       var caClient = Number(obj.Montant.replace(/,/, '.'))
                       fidDatas[key].client_encarte_nb ++
                       fidDatas[key].ca_encarte += caClient
