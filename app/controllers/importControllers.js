@@ -179,12 +179,12 @@ var importCtrl = {
                     console.log(recap)
                   })
                 })
+                return 'Département import done'
             })
-            return 'Département import done'
             .then((log2)=> {
               console.log(log2)
               csv()
-                .fromFile(fileShop)
+                .fromFile(fileFid)
                 .then((jsonObj)=>{
                     jsonObj.forEach((val) => {
                       val.week = req.body.week
@@ -202,13 +202,17 @@ var importCtrl = {
                         console.log(recap)
                       })
                     })
+                    return 'fidelite import done'
                 })
-                return 'fidelite import done'
                 .then((log3)=> {
                   console.log(log3)
-                  res.redirect('/import/all')  
+                  return log3
                 }) 
             })
+        })
+        .then((val) => {
+          console.log(val)
+          res.redirect('/import/all')
         })
     } else {
       res.redirect('/')  

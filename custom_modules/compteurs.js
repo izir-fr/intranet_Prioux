@@ -230,44 +230,48 @@ var algo = {
                   ca_encarte: 0
                 }, total._doc)
 
-                fidVal.forEach((obj) => {
-                  shop = obj.shop.replace(remove, '')
-                  fidDatas.forEach((search, key) => {
-                    if (shop === search.shop) {
-                      var caClient = Number(obj.Montant.replace(/,/, '.'))
-                      fidDatas[key].client_encarte_nb ++
-                      fidDatas[key].ca_encarte += caClient
-                      total.client_encarte_nb ++
-                      total.ca_encarte += caClient
-                    }                  
+                if (fidVal.length >= 1 && fidVal !== undefined) {
+                  fidVal.forEach((obj) => {
+                    if (obj.shop !== undefined) {
+                      shop = obj.shop.replace(remove, '')
+                      fidDatas.forEach((search, key) => {
+                        if (shop === search.shop) {
+                          var caClient = Number(obj.Montant.replace(/,/, '.'))
+                          fidDatas[key].client_encarte_nb ++
+                          fidDatas[key].ca_encarte += caClient
+                          total.client_encarte_nb ++
+                          total.ca_encarte += caClient
+                        }                  
+                      })                      
+                    }
                   })
-                })
 
-                fidDatas.forEach((val, key) => {
-                  var nonEncarte = fidDatas[key].Qt_tickets_P2 - fidDatas[key].client_encarte_nb
-                  api.push(
-                    Object.assign({
-                      client_non_encarte_num:  nonEncarte,
-                      tx_evasion:  roundNumber(nonEncarte / Number(fidDatas[key].Qt_tickets_P2) * 100, 2),
-                      tx_encarte: roundNumber(fidDatas[key].client_encarte_nb / Number(fidDatas[key].Qt_tickets_P2) * 100, 2),
-                      poids_ca: roundNumber(fidDatas[key].ca_encarte / fidDatas[key].CA_caisse_P2 *100, 2)                    
-                    }, val)
-                  )
-                })
+                  fidDatas.forEach((val, key) => {
+                    var nonEncarte = fidDatas[key].Qt_tickets_P2 - fidDatas[key].client_encarte_nb
+                    api.push(
+                      Object.assign({
+                        client_non_encarte_num:  nonEncarte,
+                        tx_evasion:  roundNumber(nonEncarte / Number(fidDatas[key].Qt_tickets_P2) * 100, 2),
+                        tx_encarte: roundNumber(fidDatas[key].client_encarte_nb / Number(fidDatas[key].Qt_tickets_P2) * 100, 2),
+                        poids_ca: roundNumber(fidDatas[key].ca_encarte / fidDatas[key].CA_caisse_P2 *100, 2)                    
+                      }, val)
+                    )
+                  })
 
-                var totalNonEncarte = total.Qt_tickets_P2 - total.client_encarte_nb
-                total = Object.assign({
-                  CARTE_fid_prog: roundNumber(((total.CARTE_fid_P2 - total.CARTE_fid_P1) / total.CARTE_fid_P1) * 100, 2),
-                  client_non_encarte_num: totalNonEncarte,
-                  tx_evasion: roundNumber(totalNonEncarte / Number(total.Qt_tickets_P2) * 100, 2),
-                  tx_encarte: roundNumber(total.client_encarte_nb / total.Qt_tickets_P2 * 100, 2),
-                  poids_ca: roundNumber(total.ca_encarte / total.CA_caisse_P2 *100, 2),
-                  ca_encarte: roundNumber(total.ca_encarte, 2)
-                }, total)
+                  var totalNonEncarte = total.Qt_tickets_P2 - total.client_encarte_nb
+                  total = Object.assign({
+                    CARTE_fid_prog: roundNumber(((total.CARTE_fid_P2 - total.CARTE_fid_P1) / total.CARTE_fid_P1) * 100, 2),
+                    client_non_encarte_num: totalNonEncarte,
+                    tx_evasion: roundNumber(totalNonEncarte / Number(total.Qt_tickets_P2) * 100, 2),
+                    tx_encarte: roundNumber(total.client_encarte_nb / total.Qt_tickets_P2 * 100, 2),
+                    poids_ca: roundNumber(total.ca_encarte / total.CA_caisse_P2 *100, 2),
+                    ca_encarte: roundNumber(total.ca_encarte, 2)
+                  }, total)
 
-                api.sort((a,b) => {
-                  return Number(b.Qt_tickets_P2) - Number(a.Qt_tickets_P2)
-                })
+                  api.sort((a,b) => {
+                    return Number(b.Qt_tickets_P2) - Number(a.Qt_tickets_P2)
+                  })                  
+                }
 
                 callback({week: req.week, year: req.year, data: api, total: total})             
               }
