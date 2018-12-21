@@ -60,7 +60,7 @@ module.exports = {
   year_select: () => {
     var out = ''
     for (var i = 1; i < 53; i++) {
-      out = out + '<option value="' + i + '">' + i + '</option>'
+      out = out + '<option value="' + i + '">S-' + i + '</option>'
     }
     return new Handlebars.SafeString(out)
   },

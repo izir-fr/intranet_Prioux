@@ -151,7 +151,7 @@ var shopCumulCalc = (val) => {
       }         
     })
   }
-console.log(nbSemaine)
+
   shops = groupByShop(datas, 'shop')
 
   datas.forEach((data) => {
@@ -254,7 +254,16 @@ console.log(nbSemaine)
 var champControllers = {
   shop: (req, res) => {
     var chptResults = []
-    var weekNum = weekSearch(championnatDate)
+    var periodeSetup
+
+    // definition de la periode d'analyse
+    if (req.query.week_start !== undefined) {
+      periodeSetup = req.query
+    } else {
+      periodeSetup = championnatDate
+    }
+
+    var weekNum = weekSearch(periodeSetup)
 
     Promise
       .map(weekNum, (date) => {
@@ -262,7 +271,7 @@ var champControllers = {
       })
       .then((val) => {
         var datas = shopCumulCalc(val)
-        res.render('partials/compteurs/shop', {data: datas.data, total: datas.total, week: championnatDate, cumul: true})
+        res.render('partials/compteurs/shop', {data: datas.data, total: datas.total, week: periodeSetup, cumul: true})
       })
       .catch((err) => {
         if (err) {
