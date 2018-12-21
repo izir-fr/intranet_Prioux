@@ -24,6 +24,15 @@ var mathFormules = {
     var roundNumber = mathFormules.round_number
     return roundNumber(cattc / qtTickets, 2)
   },
+  stock_theorique: (cattc, nbSemaine) => {
+    var roundNumber = mathFormules.round_number
+    if (!nbSemaine || !nbSemaine === undefined) {
+      return roundNumber((cattc * 52) * 0.25, 2)
+    } else {
+      return roundNumber((cattc * 52 / nbSemaine) * 0.25, 2)
+    }
+    
+  },
   sur_stock: (stockFin, stockTheo) => {
     var roundNumber = mathFormules.round_number
     return roundNumber(((stockFin / stockTheo) - 1) * 100, 2)

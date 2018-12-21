@@ -20,6 +20,8 @@ var textToNumber = require('../../custom_modules/mathFormules').text_to_number
 
 var sum = require('../../custom_modules/mathFormules').sum
 
+var stockTheo = require('../../custom_modules/mathFormules').stock_theorique
+
 var groupByShop = (tableauObjets, propriete) => {
   var arr = []
   if (tableauObjets.length >= 1) {
@@ -65,7 +67,7 @@ var shopCalc = (request) => {
   })      
 }
 
-var totalShop = (data, shop) => {
+var totalShop = (data, shop, subtotal, nbSemaine) => {
   if (shop.CA_caisse_P1 === undefined) {
     // console.log(shop.CA_caisse_P1)
     shop.CA_caisse_P1 = Number(data.CA_caisse_P1)
@@ -101,10 +103,15 @@ var totalShop = (data, shop) => {
     shop.POURC_marge_P1 = txMarge(shop.CA_caisse_P1, shop.MARGE_P1)
     shop.MARGE_P2 = Number(data.MARGE_P2) + shop.MARGE_P2
     shop.POURC_marge_P2 = txMarge(shop.CA_caisse_P2, shop.MARGE_P2)
-    shop.STOCK_fin_P1 = Number(data.STOCK_fin_P1) + shop.STOCK_fin_P1
-    shop.STOCK_fin_P2 = Number(data.STOCK_fin_P2) + shop.STOCK_fin_P2
+    if (subtotal) {
+      shop.STOCK_fin_P1 = Number(data.STOCK_fin_P1)
+      shop.STOCK_fin_P2 = Number(data.STOCK_fin_P2)    
+    } else {
+      shop.STOCK_fin_P1 = Number(data.STOCK_fin_P1) + shop.STOCK_fin_P1
+      shop.STOCK_fin_P2 = Number(data.STOCK_fin_P2) + shop.STOCK_fin_P2  
+    }
     shop.PROG_Stock_fin = txProg(shop.STOCK_fin_P1, shop.STOCK_fin_P2)
-    shop.STOCK_Theorique = Number(data.STOCK_Theorique) + shop.STOCK_Theorique
+    shop.STOCK_Theorique = stockTheo(shop.CA_caisse_P2, nbSemaine)
     shop.STOCK_surplus_POURC = surStock(shop.STOCK_fin_P2, shop.STOCK_Theorique)
     shop.Qt_venteCaisse_P1 = Number(data.Qt_venteCaisse_P1) + shop.Qt_venteCaisse_P1
     shop.Qt_venteCaisse_P2 = Number(data.Qt_venteCaisse_P2) + shop.Qt_venteCaisse_P2
@@ -127,6 +134,7 @@ var totalShop = (data, shop) => {
 var shopCumulCalc = (val) => {
   var datas = []
   var shops = []
+  var nbSemaine = 0
   var total = { shop: 'TOTAL' }
 
   if (val.length >= 1) {
@@ -139,21 +147,25 @@ var shopCumulCalc = (val) => {
         data.data.forEach((populate, weekKey) => {
           datas.push(populate)
         })
+        nbSemaine ++
       }         
     })
   }
-
+console.log(nbSemaine)
   shops = groupByShop(datas, 'shop')
+
   datas.forEach((data) => {
     shops.forEach((shop) => {
       if (data.shop === shop.shop) {
-        shop = totalShop(data, shop)
+        var subtotal = true
+        shop = totalShop(data, shop, subtotal, nbSemaine)
       }
     })
   })
 
   shops.forEach((shop, keyShop) => {
-    shop = totalShop(shop, total)
+    var subtotal = false
+    total = totalShop(shop, total, subtotal, nbSemaine)
   })
 
   return {data: shops, total: total}
