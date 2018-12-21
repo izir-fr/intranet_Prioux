@@ -123,6 +123,98 @@ var importCtrl = {
       res.redirect('/')  
     }
   }, 
+  // all
+  getImportAll: (req, res) => {
+    if (process.env.LOCAL) {
+      res.render('partials/import/form-all', {title: "Tout", form: "all"})
+    } else {
+      res.redirect('/') 
+    }
+  },
+  postImportAll: (req, res) => {
+    if (process.env.LOCAL) {
+      console.log('import start')
+      const fileShop = path.join(__dirname, '../../import/' + req.body.file_shop)
+      const fileDpt = path.join(__dirname, '../../import/' + req.body.file_departement)
+      const fileFid = path.join(__dirname, '../../import/' + req.body.file_fid)
+
+      const csv = require('csvtojson')
+      csv()
+        .fromFile(fileShop)
+        .then((jsonObj)=>{
+            jsonObj.forEach((val) => {
+              val.week = req.body.week
+              val.year = req.body.year
+
+              var singleShopRecap = new ShopRecap(val)
+              singleShopRecap.save(function (err, recap) {
+                if (err) {
+                  console.log({
+                    error_msg: 'Une erreur est survenue lors de l\'enregistrement des récaps',
+                    magasin: val.shop
+                  })
+                }
+                console.log(recap)
+              })
+            })
+          return 'Shop import done'
+        })
+        .then((log1)=> {
+          console.log(log1)
+          csv()
+            .fromFile(fileDpt)
+            .then((jsonObj)=>{
+                jsonObj.forEach((val) => {
+                  val.week = req.body.week
+                  val.year = req.body.year
+
+                  var singleDptRecap = new DepartementRecap(val)
+                  singleDptRecap.save(function (err, recap) {
+                    if (err) {
+                      console.log({
+                        error_msg: 'Une erreur est survenue lors de l\'enregistrement des récaps',
+                        magasin: val.shop
+                      })
+                    }
+                    console.log(recap)
+                  })
+                })
+            })
+            return 'Département import done'
+            .then((log2)=> {
+              console.log(log2)
+              csv()
+                .fromFile(fileShop)
+                .then((jsonObj)=>{
+                    jsonObj.forEach((val) => {
+                      val.week = req.body.week
+                      val.year = req.body.year
+                      val.shop = val.Magasin
+
+                      var singlefidRecap = new FideliteRecap(val)
+                      singlefidRecap.save(function (err, recap) {
+                        if (err) {
+                          console.log({
+                            error_msg: 'Une erreur est survenue lors de l\'enregistrement des récaps',
+                            magasin: val.shop
+                          })
+                        }
+                        console.log(recap)
+                      })
+                    })
+                })
+                return 'fidelite import done'
+                .then((log3)=> {
+                  console.log(log3)
+                  res.redirect('/import/all')  
+                }) 
+            })
+        })
+    } else {
+      res.redirect('/')  
+    }
+  },
+
 }
 
 module.exports = importCtrl

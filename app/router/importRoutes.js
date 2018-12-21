@@ -17,4 +17,8 @@ router.get('/fidelite', importCtrl.getImportFid)
 
 router.post('/fidelite', importCtrl.postImportFid)
 
+router.get('/all', importCtrl.getImportAll)
+
+router.post('/all', importCtrl.postImportAll)
+
 module.exports = router
