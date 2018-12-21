@@ -1,7 +1,7 @@
 var config = {
   championnat_date: {
     week_start: 32,
-    week_end: 6,
+    week_end: 5,
     year_start: 2018,
     year_end: 2019
   },
