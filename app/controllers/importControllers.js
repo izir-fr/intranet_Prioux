@@ -47,6 +47,11 @@ var importCtrl = {
   // DEPARTEMENT
   getImportDpt: (req, res) => {
     if (process.env.LOCAL) {
+      // DepartementRecap
+      //   .deleteMany({week: 52})
+      //   .exec((err, res) => {
+      //     console.log(res.length)
+      //   })
       res.render('partials/import/form', {title: "Département", form: "departement"})
     } else {
       res.redirect('/') 

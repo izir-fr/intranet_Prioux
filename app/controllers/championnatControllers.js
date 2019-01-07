@@ -9,7 +9,7 @@ var roundNumber = require('../../custom_modules/mathFormules').round_number
 var weekSearch = (championnatDate) => {
   var date = []
   if (championnatDate.week_start > championnatDate.week_end) {
-    for (var i = championnatDate.week_start; i <= 53; i++) {
+    for (var i = championnatDate.week_start; i <= 52; i++) {
       date.push({week: i , year: championnatDate.year_start})
     }
     for (var i = 1; i <= championnatDate.week_end; i++) {
