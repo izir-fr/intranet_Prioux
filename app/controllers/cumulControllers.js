@@ -38,6 +38,22 @@ var groupByShop = (tableauObjets, propriete) => {
   return arr
 }
 
+var groupByDpt = (tableauObjets, propriete) => {
+  var arr = []
+  if (tableauObjets.length >= 1) {
+    tableauObjets.forEach((val) => {
+      var filter = arr.find((search) => {
+        return val[propriete] === search[propriete]
+      })
+
+      if (!filter) {
+        arr.push({departement: val[propriete]})
+      }
+    })
+  }
+  return arr
+}
+
 var weekSearch = (championnatDate) => {
   var date = []
   if (championnatDate.week_start > championnatDate.week_end) {
@@ -67,69 +83,8 @@ var shopCalc = (request) => {
   })      
 }
 
-var totalShop = (data, shop, subtotal, nbSemaine) => {
-  if (shop.CA_caisse_P1 === undefined) {
-    // console.log(shop.CA_caisse_P1)
-    shop.CA_caisse_P1 = Number(data.CA_caisse_P1)
-    shop.CA_caisse_P2 = Number(data.CA_caisse_P2)
-    shop.PROG_CA_ttc = Number(data.PROG_CA_ttc)
-    shop.POURC_marge_P1 = textToNumber(data.POURC_marge_P1)
-    shop.MARGE_P1 = Number(data.MARGE_P1)
-    shop.POURC_marge_P2 = textToNumber(data.POURC_marge_P2)
-    shop.MARGE_P2 = Number(data.MARGE_P2)
-    shop.STOCK_fin_P1 = Number(data.STOCK_fin_P1)
-    shop.STOCK_fin_P2 = Number(data.STOCK_fin_P2)
-    shop.PROG_Stock_fin = Number(data.PROG_Stock_fin)
-    shop.STOCK_Theorique = Number(data.STOCK_Theorique)
-    shop.STOCK_surplus_POURC = Number(data.STOCK_surplus_POURC)
-    shop.Qt_venteCaisse_P1 = Number(data.Qt_venteCaisse_P1)
-    shop.Qt_venteCaisse_P2 = Number(data.Qt_venteCaisse_P2)
-    shop.PROG_Qt_Ventes = Number(data.PROG_Qt_Ventes)
-    shop.Qt_tickets_P1 = Number(data.Qt_tickets_P1)
-    shop.Qt_tickets_P2 = Number(data.Qt_tickets_P2)
-    shop.PROG_Qt_ticket = Number(data.PROG_Qt_ticket)
-    shop.IDV_P1 = textToNumber(data.IDV_P1)
-    shop.IDV_P2 = textToNumber(data.IDV_P2)
-    shop.PANIER_moyen_P1 = textToNumber(data.PANIER_moyen_P1)
-    shop.PANIER_moyen_P2 = textToNumber(data.PANIER_moyen_P2)
-    shop.PROG_PanierMoyen = textToNumber(data.PROG_PanierMoyen)
-    shop.CA_m2_P1 = caSurface(shop.CA_caisse_P1, shop.shop)
-    shop.CA_m2_P2 = caSurface(shop.CA_caisse_P2, shop.shop)
-  } else {
-    shop.CA_caisse_P1 = Number(data.CA_caisse_P1) + shop.CA_caisse_P1
-    shop.CA_caisse_P2 = Number(data.CA_caisse_P2) + shop.CA_caisse_P2
-    shop.PROG_CA_ttc = txProg(shop.CA_caisse_P1, shop.CA_caisse_P2)
-    shop.MARGE_P1 = Number(data.MARGE_P1) + shop.MARGE_P1
-    shop.POURC_marge_P1 = txMarge(shop.CA_caisse_P1, shop.MARGE_P1)
-    shop.MARGE_P2 = Number(data.MARGE_P2) + shop.MARGE_P2
-    shop.POURC_marge_P2 = txMarge(shop.CA_caisse_P2, shop.MARGE_P2)
-    if (subtotal) {
-      shop.STOCK_fin_P1 = Number(data.STOCK_fin_P1)
-      shop.STOCK_fin_P2 = Number(data.STOCK_fin_P2)    
-    } else {
-      shop.STOCK_fin_P1 = Number(data.STOCK_fin_P1) + shop.STOCK_fin_P1
-      shop.STOCK_fin_P2 = Number(data.STOCK_fin_P2) + shop.STOCK_fin_P2  
-    }
-    shop.PROG_Stock_fin = txProg(shop.STOCK_fin_P1, shop.STOCK_fin_P2)
-    shop.STOCK_Theorique = stockTheo(shop.CA_caisse_P2, nbSemaine)
-    shop.STOCK_surplus_POURC = surStock(shop.STOCK_fin_P2, shop.STOCK_Theorique)
-    shop.Qt_venteCaisse_P1 = Number(data.Qt_venteCaisse_P1) + shop.Qt_venteCaisse_P1
-    shop.Qt_venteCaisse_P2 = Number(data.Qt_venteCaisse_P2) + shop.Qt_venteCaisse_P2
-    shop.PROG_Qt_Ventes = txProg(shop.Qt_venteCaisse_P1, shop.Qt_venteCaisse_P2)
-    shop.Qt_tickets_P1 = Number(data.Qt_tickets_P1) + shop.Qt_tickets_P1
-    shop.Qt_tickets_P2 = Number(data.Qt_tickets_P2) + shop.Qt_tickets_P2
-    shop.PROG_Qt_ticket = txProg(shop.Qt_tickets_P1, shop.Qt_tickets_P2)
-    shop.IDV_P1 = idv(shop.Qt_venteCaisse_P1, shop.Qt_tickets_P1)
-    shop.IDV_P2 = idv(shop.Qt_venteCaisse_P2, shop.Qt_tickets_P2)
-    shop.PANIER_moyen_P1 = panierMoyen(shop.CA_caisse_P1, shop.Qt_tickets_P1)
-    shop.PANIER_moyen_P2 = panierMoyen(shop.CA_caisse_P2, shop.Qt_tickets_P2)
-    shop.PROG_PanierMoyen = txProg(shop.PANIER_moyen_P1, shop.PANIER_moyen_P2)
-    shop.CA_m2_P1 = caSurface(shop.CA_caisse_P1, shop.shop)
-    shop.CA_m2_P2 = caSurface(shop.CA_caisse_P2, shop.shop)
-  }
-
-  return shop
-}
+var totalShop = require('../../custom_modules/cumul').totalShop
+var totalDepartement = require('../../custom_modules/cumul').totalDepartement
 
 var shopCumulCalc = (val) => {
   var datas = []
@@ -171,85 +126,57 @@ var shopCumulCalc = (val) => {
   return {data: shops, total: total}
 }
 
-// var dptCalc = (request, league) => {
-//   return new Promise((resolve, reject) => {
-//     require('../../custom_modules/compteurs').departement(request, (err) => {
-//       if (err) {
-//         reject(null)
-//       }
-//     }, (data) => {
-//       var finalDatasLa = []
-//       var finalDatasLb = []
+var dptCalc = (weekNum) => {
+  return new Promise ((resolve, reject) => {
+    require('../../custom_modules/compteurs').departement(weekNum, (err) => {
+      if (err) {
+        reject(null)
+      }
+    }, (data) => {
+      resolve(data)
+    })      
+  })      
+}
 
-//       if (data.data.length >= 1) {
-//         data.data.forEach((search) => {
-//           var filter = leagueB.find((elt) => {
-//             return elt === search.departement
-//           })
+var dptCumulCalc = (val) => {
+  var datas = []
+  var dpt = []
+  var nbSemaine = 0
+  var total = { shop: 'TOTAL' }
 
-//           if (filter === undefined) {
-//             if (search.departement !== 'Non défini' && search.departement !== 'SAC DE CAISSE' && search.departement !== 'SFA NON UTILISEE' && search.departement !== 'OFFRE CLUB & COLLECTIVITES' && search.departement !==  'PRODUITS NON COMMERCIALISES' && search.departement !== 'EQUITATION' && search.departement !== 'SPORTS OUTDOOR' && search.departement !== 'GOLF') {
-//               finalDatasLa.push(search)
-//             }          
-//           } else {
-//             finalDatasLb.push(search)
-//           }
-//         })        
-//       }
+  if (val.length >= 1) {
+    val.forEach((weeks, valKey) => {
+      var data = weeks
 
-//       if (league === 'LA') {
-//         data.data = finalDatasLa
-//       } else if (league === 'LB') {
-//         data.data = finalDatasLb
-//       }
-//       resolve(data)
-//     })      
-//   })      
-// }
+      // calcul du championnat semaine
+      if (data.data.length >= 1) {
+        // calcul des poinst du tx d'évasion
+        data.data.forEach((populate, weekKey) => {
+          datas.push(populate)
+        })
+        nbSemaine ++
+      }         
+    })
+  }
 
-// var dptCumulCalc = (val) => {
-//   var datas = []
-//   val.forEach((week, valKey) => {
-//     var data = week
-//     datas.push(data)
+  dpt = groupByDpt(datas, 'departement')
 
-//     // calcul du championnat semaine
-//     if (data.data.length >= 1) {
-//       // calcul des poinst du tx d'évasion
-//       data.data.forEach((populate, weekKey) => {
-//         populate.total.PROG_euro_Marge_pourc = roundNumber(Number(populate.total.PROG_euro_Marge_pourc))
-//         populate.total.STOCK_surplus_POURC = roundNumber(Number(populate.total.STOCK_surplus_POURC) * -1)
-//         populate.points_total = roundNumber(Number(populate.total.PROG_euro_Marge_pourc.replace(/,/, '.')) + Number(populate.total.STOCK_surplus_POURC.replace(/,/, '.')))
+  datas.forEach((data) => {
+    dpt.forEach((departement) => {
+      if (data.departement === departement.departement) {
+        var subtotal = true
+        departement = totalDepartement(data, departement, subtotal, nbSemaine)
+      }
+    })
+  })
 
-//         // cumul calc
-//         if ((valKey - 1) < 0) {
-//           populate.cumul_points = populate.points_total
-//         } else if (val[valKey - 1].data.length >= 1 || val[valKey - 1].data !== undefined) {
-//           var prev = val[valKey - 1].data.find((obj) => {
-//             if (obj.departement === populate.departement) {
-//               return obj
-//             }
-//           })
-//           if (prev !== undefined) {
-//             populate.cumul_points = Number(populate.points_total) + Number(prev.cumul_points)
-//           }
-//         } else {
-//           populate.cumul_points = populate.points_total
-//         }
-//       })
-//       data.data.sort((a, b) => {
-//         return b.cumul_points - a.cumul_points
-//       })
-//       data.data.forEach((classement, key) => {
-//         classement.classement_general = key + 1
-//       })
-//       data.data.sort((a, b) => {
-//         return b.points_total - a.points_total
-//       })
-//     }
-//   })
-//   return datas
-// }
+  dpt.forEach((departement, keyShop) => {
+    var subtotal = false
+    total = totalDepartement(departement, total, subtotal, nbSemaine)
+  })
+
+  return {data: dpt, total: total}
+}
 
 var champControllers = {
   shop: (req, res) => {
@@ -280,22 +207,31 @@ var champControllers = {
       }) 
   },
   departement: (req, res) => {
-    // var chptResults = []
-    // var weekNum = weekSearch(championnatDate)
+    var chptResults = []
+    var periodeSetup
 
-    // Promise
-    //   .map(weekNum, (date) => {
-    //     return dptCalc(date, 'LA')
-    //   })
-    //   .then((val) => {
-    //     var datas = dptCumulCalc(val)
-    //     res.render('partials/compteurs/departement', {data: datas, date: championnatDate})
-    //   })
-    //   .catch((err) => {
-    //     if (err) {
-    //       console.log(err)
-    //     }
-    //   }) 
+    // definition de la periode d'analyse
+    if (req.query.week_start !== undefined) {
+      periodeSetup = req.query
+    } else {
+      periodeSetup = championnatDate
+    }
+
+    var weekNum = weekSearch(periodeSetup)
+
+    Promise
+      .map(weekNum, (date) => {
+        return dptCalc(date)
+      })
+      .then((val) => {
+        var datas = dptCumulCalc(val)
+        res.render('partials/compteurs/departement', { data: datas.data, total: datas.total, week: periodeSetup, cumul: true })
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err)
+        }
+      }) 
   }
 }
 
