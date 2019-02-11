@@ -20,11 +20,23 @@ var mathFormules = {
   },
   tx_prog: (valPremier, valSecond) => {
     var roundNumber = mathFormules.round_number
-    return roundNumber(((valSecond - valPremier) / abs(valPremier)) * 100, 2)
+    var prog = roundNumber(((valSecond - valPremier) / abs(valPremier)) * 100, 2)
+    if (prog === NaN || prog === 'NaN') {
+      return 0
+    } else if (prog === Infinity || prog === 'Infinity') {
+      return 100
+    } else {
+      return prog
+    }
   },
   tx_marge: (cattc, margeht) => {
     var roundNumber = mathFormules.round_number
-    return roundNumber((margeht / (cattc / 1.2)) * 100, 2)
+    var taux = roundNumber((margeht / (cattc / 1.2)) * 100, 2)
+    if (taux === NaN || taux === 'NaN') {
+      return 0
+    } else {
+      return taux
+    }
   },
   idv: (quantiteVente, quantiteTiquets) => {
     var roundNumber = mathFormules.round_number
@@ -36,16 +48,28 @@ var mathFormules = {
   },
   stock_theorique: (cattc, nbSemaine) => {
     var roundNumber = mathFormules.round_number
+    var stockVal
     if (!nbSemaine || !nbSemaine === undefined) {
-      return roundNumber((cattc * 52) * 0.25, 2)
+      stockVal = roundNumber((cattc * 52) * 0.25, 2)
     } else {
-      return roundNumber((cattc * 52 / nbSemaine) * 0.25, 2)
+      stockVal = roundNumber((cattc * 52 / nbSemaine) * 0.25, 2)
     }
-    
+    if (stockVal === NaN || stockVal === 'NaN') {
+      return 0
+    } else {
+      return stockVal
+    }
   },
   sur_stock: (stockFin, stockTheo) => {
     var roundNumber = mathFormules.round_number
-    return roundNumber(((stockFin / stockTheo) - 1) * 100, 2)
+    var surStock = roundNumber(((stockFin / stockTheo) - 1) * 100, 2)
+    if (surStock === NaN || surStock === 'NaN') {
+      return 0
+    } else if (surStock === Infinity || surStock === 'Infinity') {
+      return 100
+    } else {
+      return surStock
+    }
   },
   ca_surface: (cattc, shop_querry) => {
     var shop = require('../app/config/shop').find((search) => {
