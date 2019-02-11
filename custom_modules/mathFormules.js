@@ -1,3 +1,13 @@
+var abs = (x) => {
+  if (Number(x) > 0) {
+    return x
+  } else if (Number(x) < 0) {
+    return Number(x) * -1
+  } else {
+    return x
+  }
+}
+
 var mathFormules = {
   round_number: (value, decimal) => {
     var round
@@ -10,7 +20,7 @@ var mathFormules = {
   },
   tx_prog: (valPremier, valSecond) => {
     var roundNumber = mathFormules.round_number
-    return roundNumber(((valSecond - valPremier) / valPremier) * 100, 2)
+    return roundNumber(((valSecond - valPremier) / abs(valPremier)) * 100, 2)
   },
   tx_marge: (cattc, margeht) => {
     var roundNumber = mathFormules.round_number
