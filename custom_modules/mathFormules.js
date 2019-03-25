@@ -82,14 +82,14 @@ var mathFormules = {
   },
   text_to_number: (val) => {
     var roundNumber = mathFormules.round_number
-    var number = Number(val.replace(/,/, '.'))
+    var number = Number(val.replace(/[,]/, '.'))
     return roundNumber(number, 2)
   },
   sum: (tableauObjets, propriete) => {
     var total = tableauObjets.reduce((accumulateur, valeurCourante) => {
       var number = 0
       if (valeurCourante[propriete] !== undefined) {
-        number = valeurCourante[propriete].replace(/,/, '.')
+        number = valeurCourante[propriete].replace(/[,]/, '.')
       }
       return accumulateur + Number(number)
     }, 0)

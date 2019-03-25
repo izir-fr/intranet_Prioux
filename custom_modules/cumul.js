@@ -84,13 +84,14 @@ var cumul = {
     },
     totalDepartement: (data, dpt, subtotal, nbSemaine) => {
       if (dpt.CA_P1 === undefined) {
+        console.log(data)
         // console.log(dpt.CA_caisse_P1)
         dpt.CA_P1 = Number(data.CA_P1)
         dpt.CA_P2 = Number(data.CA_P2)
         dpt.PROG_CA_ttc = Number(data.PROG_CA_ttc)
-        dpt.POURC_marge_P1 = textToNumber(data.POURC_marge_P1)
+        dpt.POURC_marge_P1 = Number(data.POURC_marge_P1)
         dpt.MARGE_P1 = Number(data.MARGE_P1)
-        dpt.POURC_marge_P2 = textToNumber(data.POURC_marge_P2)
+        dpt.POURC_marge_P2 = Number(data.POURC_marge_P2)
         dpt.MARGE_P2 = Number(data.MARGE_P2)
         dpt.STOCK_fin_P1 = Number(data.STOCK_fin_P1)
         dpt.STOCK_fin_P2 = Number(data.STOCK_fin_P2)
