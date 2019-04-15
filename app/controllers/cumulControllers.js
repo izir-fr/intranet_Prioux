@@ -54,22 +54,7 @@ var groupByDpt = (tableauObjets, propriete) => {
   return arr
 }
 
-var weekSearch = (championnatDate) => {
-  var date = []
-  if (championnatDate.week_start > championnatDate.week_end) {
-    for (var i = championnatDate.week_start; i <= 53; i++) {
-      date.push({week: i , year: championnatDate.year_start})
-    }
-    for (var i = 1; i <= championnatDate.week_end; i++) {
-      date.push({week: i , year: championnatDate.year_end})
-    }    
-  } else {
-    for (var i = championnatDate.week_start; i <= championnatDate.week_end; i++) {
-      date.push({week: i , year: championnatDate.year_end})
-    }      
-  }
-  return date
-}
+var weekSearch = require('../../custom_modules/week_search')
 
 var shopCalc = (request) => {
   return new Promise((resolve, reject) => {

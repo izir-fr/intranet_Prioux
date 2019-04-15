@@ -6,22 +6,7 @@ var leagueB = require('../config/championnat').leagueB
 
 var roundNumber = require('../../custom_modules/mathFormules').round_number
 
-var weekSearch = (championnatDate) => {
-  var date = []
-  if (championnatDate.week_start > championnatDate.week_end) {
-    for (var i = championnatDate.week_start; i <= 52; i++) {
-      date.push({week: i , year: championnatDate.year_start})
-    }
-    for (var i = 1; i <= championnatDate.week_end; i++) {
-      date.push({week: i , year: championnatDate.year_end})
-    }    
-  } else {
-    for (var i = championnatDate.week_start; i <= championnatDate.week_end; i++) {
-      date.push({week: i , year: championnatDate.year_end})
-    }      
-  }
-  return date
-}
+var weekSearch = require('../../custom_modules/week_search')
 
 var shopFid = (request) => {
   return new Promise((resolve, reject) => {
