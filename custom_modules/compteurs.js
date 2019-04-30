@@ -248,6 +248,9 @@ var algo = {
 
                   fidDatas.forEach((val, key) => {
                     var nonEncarte = fidDatas[key].Qt_tickets_P2 - fidDatas[key].client_encarte_nb
+                    if (nonEncarte < 0) {
+                      nonEncarte = 0
+                    }
                     api.push(
                       Object.assign({
                         client_non_encarte_num:  nonEncarte,
