@@ -1,9 +1,9 @@
 var config = {
   championnat_date: {
-    week_start: 6,
-    week_end: 31,
+    week_start: 32,
+    week_end: 5,
     year_start: 2019,
-    year_end: 2019
+    year_end: 2020
   },
   leagueB: [
     'GLISSE URBAINE',
