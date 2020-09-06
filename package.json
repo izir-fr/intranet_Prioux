@@ -40,7 +40,7 @@
     "express-session": "^1.16.2",
     "express-validator": "^5.3.1",
     "forest-express-mongoose": "^3.2.4",
-    "handlebars": "^4.2.0",
+    "handlebars": "^4.5.3",
     "helmet": "^3.21.0",
     "mongoose": "^5.6.13",
     "morgan": "^1.9.1",
